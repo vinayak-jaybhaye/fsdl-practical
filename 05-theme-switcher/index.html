@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theme Switcher</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #10223f;
+      --accent: #0d6efd;
+    }
+
+    body.dark {
+      --bg: #121826;
+      --card: #1a2336;
+      --text: #eaf1ff;
+      --accent: #79b1ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: .2s ease;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <article class="card">
+      <div class="row">
+        <h1>Theme Switcher</h1>
+        <button id="toggle">Toggle Theme</button>
+      </div>
+      <p>Preference is persisted in localStorage so mode remains after refresh.</p>
+    </article>
+  </div>
+
+  <script>
+    const key = 'fsdl-theme';
+    const saved = localStorage.getItem(key) || 'light';
+    if (saved === 'dark') document.body.classList.add('dark');
+
+    document.getElementById('toggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem(key, document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #dff4ff, #f4e9ff);
+    }
+
+    .form-wrap {
+      max-width: 620px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccd5e7;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 11px;
+      background: #1d64d0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <form class="form-wrap">
+    <h1>Student Registration</h1>
+    <div class="grid">
+      <div>
+        <label>Name</label>
+        <input type="text" required>
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" required>
+      </div>
+      <div>
+        <label>Gender</label>
+        <select>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label>Course</label>
+        <select>
+          <option>B.Tech CSE</option>
+          <option>BCA</option>
+          <option>MCA</option>
+        </select>
+      </div>
+      <div class="full">
+        <label>Address</label>
+        <textarea rows="4"></textarea>
+      </div>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+</body>
+
+</html>

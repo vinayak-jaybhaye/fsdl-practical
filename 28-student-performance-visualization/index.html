@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Performance Visualization</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f9ff;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Student Performance Dashboard</h1>
+    <div class="grid">
+      <div class="card"><canvas id="marksChart"></canvas></div>
+      <div class="card"><canvas id="attendanceChart"></canvas></div>
+      <div class="card"><canvas id="progressChart"></canvas></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const students = ['Anu', 'Bala', 'Charan', 'Divya', 'Eshan'];
+
+    new Chart(document.getElementById('marksChart'), {
+      type: 'bar',
+      data: {
+        labels: students,
+        datasets: [{ label: 'Marks', data: [85, 74, 91, 88, 79], backgroundColor: '#5b8def' }]
+      },
+      options: { scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    new Chart(document.getElementById('attendanceChart'), {
+      type: 'line',
+      data: {
+        labels: students,
+        datasets: [{ label: 'Attendance (%)', data: [96, 82, 91, 94, 86], borderColor: '#27ae60', tension: 0.3 }]
+      },
+      options: { scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    new Chart(document.getElementById('progressChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Assignments', 'Labs', 'Quiz', 'Project', 'Viva'],
+        datasets: [{
+          label: 'Class Average',
+          data: [80, 75, 68, 88, 77],
+          backgroundColor: 'rgba(242,153,74,0.25)',
+          borderColor: '#f2994a'
+        }]
+      },
+      options: { scales: { r: { beginAtZero: true, max: 100 } } }
+    });
+  </script>
+</body>
+
+</html>

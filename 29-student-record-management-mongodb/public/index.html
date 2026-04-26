@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Record Management</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7ff;
+    }
+
+    .wrap {
+      max-width: 840px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      border: 1px solid #ced7ea;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #1b66d2;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th,
+    td {
+      border: 1px solid #d8e0f2;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e8efff;
+    }
+
+    #msg {
+      margin-top: 10px;
+      min-height: 20px;
+      color: #b03630;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Student Record Management</h1>
+    <div class="grid">
+      <input id="name" placeholder="Name" />
+      <input id="rollNo" placeholder="Roll No" />
+      <input id="branch" placeholder="Branch" />
+      <button id="add">Add</button>
+    </div>
+    <div id="msg"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Roll No</th>
+          <th>Branch</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const list = document.getElementById('list');
+    const msg = document.getElementById('msg');
+
+    async function loadStudents() {
+      const res = await fetch('/api/students');
+      const students = await res.json();
+      list.innerHTML = students.map((s) => `
+        <tr>
+          <td>${s.name}</td>
+          <td>${s.rollNo}</td>
+          <td>${s.branch}</td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('add').addEventListener('click', async () => {
+      msg.textContent = '';
+      const name = document.getElementById('name').value.trim();
+      const rollNo = document.getElementById('rollNo').value.trim();
+      const branch = document.getElementById('branch').value.trim();
+
+      if (!name || !rollNo || !branch) {
+        msg.textContent = 'All fields are required.';
+        return;
+      }
+
+      const res = await fetch('/api/students', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, rollNo, branch })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        msg.textContent = data.error || data.message || 'Failed to add student.';
+        return;
+      }
+
+      document.getElementById('name').value = '';
+      document.getElementById('rollNo').value = '';
+      document.getElementById('branch').value = '';
+      loadStudents();
+    });
+
+    loadStudents();
+  </script>
+</body>
+
+</html>

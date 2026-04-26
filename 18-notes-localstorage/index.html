@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App with localStorage</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f5ef;
+    }
+
+    .wrap {
+      max-width: 700px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    textarea,
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #dfd4c5;
+    }
+
+    button {
+      background: #b77724;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .note {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ebdfd0;
+      border-radius: 8px;
+      background: #fffdf9;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .del {
+      background: #c53d31;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Notes</h1>
+    <div class="row">
+      <textarea id="noteInput" placeholder="Write a note..."></textarea>
+      <button id="add">Add Note</button>
+    </div>
+    <div id="notes"></div>
+  </div>
+
+  <script>
+    const KEY = 'fsdl-notes';
+    const notesDiv = document.getElementById('notes');
+    let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+    function save() {
+      localStorage.setItem(KEY, JSON.stringify(notes));
+    }
+
+    function render() {
+      notesDiv.innerHTML = notes.map((text, i) => `
+        <div class="note">
+          <span>${text}</span>
+          <button class="del" data-index="${i}">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('add').addEventListener('click', () => {
+      const input = document.getElementById('noteInput');
+      const text = input.value.trim();
+      if (!text) return;
+      notes.unshift(text);
+      save();
+      render();
+      input.value = '';
+    });
+
+    notesDiv.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('del')) return;
+      const idx = Number(e.target.dataset.index);
+      notes.splice(idx, 1);
+      save();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+
+</html>

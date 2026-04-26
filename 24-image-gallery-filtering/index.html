@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Gallery with Category Filtering</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .filters button {
+      padding: 8px 12px;
+      border: 1px solid #c9d5ea;
+      background: #fff;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .filters button.active {
+      background: #185fd8;
+      color: #fff;
+      border-color: #185fd8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      overflow: hidden;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .item p {
+      margin: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Image Gallery</h1>
+    <div id="filters" class="filters"></div>
+    <div id="grid" class="grid"></div>
+  </div>
+
+  <script>
+    const images = [
+      { title: 'Mountain', cat: 'nature', src: 'https://picsum.photos/seed/n1/500/300' },
+      { title: 'Forest', cat: 'nature', src: 'https://picsum.photos/seed/n2/500/300' },
+      { title: 'Street', cat: 'city', src: 'https://picsum.photos/seed/c1/500/300' },
+      { title: 'Skyline', cat: 'city', src: 'https://picsum.photos/seed/c2/500/300' },
+      { title: 'Laptop Desk', cat: 'work', src: 'https://picsum.photos/seed/w1/500/300' },
+      { title: 'Meeting', cat: 'work', src: 'https://picsum.photos/seed/w2/500/300' }
+    ];
+
+    const categories = ['all', ...new Set(images.map((i) => i.cat))];
+    const filters = document.getElementById('filters');
+    const grid = document.getElementById('grid');
+
+    function renderButtons(active) {
+      filters.innerHTML = categories.map((cat) => `<button class="${cat === active ? 'active' : ''}" data-cat="${cat}">${cat.toUpperCase()}</button>`).join('');
+    }
+
+    function renderImages(active = 'all') {
+      const list = active === 'all' ? images : images.filter((i) => i.cat === active);
+      grid.innerHTML = list.map((i) => `
+        <div class="item">
+          <img src="${i.src}" alt="${i.title}" />
+          <p>${i.title} - ${i.cat}</p>
+        </div>
+      `).join('');
+    }
+
+    filters.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') return;
+      const cat = e.target.dataset.cat;
+      renderButtons(cat);
+      renderImages(cat);
+    });
+
+    renderButtons('all');
+    renderImages('all');
+  </script>
+</body>
+
+</html>

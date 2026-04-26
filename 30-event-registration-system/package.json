@@ -1,0 +1,13 @@
+{
+  "name": "event-registration-system",
+  "version": "1.0.0",
+  "description": "FSDL practical task 30",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.13.2"
+  }
+}

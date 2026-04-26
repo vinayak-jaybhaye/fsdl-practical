@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Gallery</title>
+  <style>
+    body {
+      font-family: Helvetica, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+    }
+
+    .wrap {
+      max-width: 1000px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, .08);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card .content {
+      padding: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 9px;
+      border: none;
+      border-radius: 8px;
+      background: #1565d8;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="head">
+      <h1>Product Gallery</h1>
+      <strong id="cartCount">Cart: 0</strong>
+    </div>
+    <div id="products" class="grid"></div>
+  </div>
+
+  <script>
+    const data = [
+      { id: 1, name: 'Wireless Mouse', price: 799, image: 'https://picsum.photos/seed/mouse/500/300' },
+      { id: 2, name: 'Mechanical Keyboard', price: 2499, image: 'https://picsum.photos/seed/keyboard/500/300' },
+      { id: 3, name: 'USB-C Hub', price: 1499, image: 'https://picsum.photos/seed/hub/500/300' },
+      { id: 4, name: 'Webcam', price: 1899, image: 'https://picsum.photos/seed/webcam/500/300' }
+    ];
+
+    let cartCount = 0;
+
+    function renderProducts() {
+      const container = document.getElementById('products');
+      container.innerHTML = data.map((p) => `
+        <article class="card">
+          <img src="${p.image}" alt="${p.name}" />
+          <div class="content">
+            <h3>${p.name}</h3>
+            <p>Rs ${p.price}</p>
+            <button data-id="${p.id}">Buy Now</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('products').addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        cartCount += 1;
+        document.getElementById('cartCount').textContent = `Cart: ${cartCount}`;
+      }
+    });
+
+    renderProducts();
+  </script>
+</body>
+
+</html>

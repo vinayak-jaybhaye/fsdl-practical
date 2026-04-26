@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Application</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f9ff;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .q {
+      margin: 14px 0;
+      padding: 12px;
+      border: 1px solid #d6e0f3;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 14px;
+      background: #1f64d2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 16px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Mini Quiz</h1>
+    <form id="quizForm"></form>
+    <button id="submit">Submit Quiz</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: 'HTML stands for?', options: ['Hyper Text Markup Language', 'High Text Machine Language', 'Home Tool Markup Language'], answer: 0 },
+      { q: 'Which keyword declares a block-scoped variable in JS?', options: ['var', 'let', 'define'], answer: 1 },
+      { q: 'CSS property to change text color?', options: ['font-style', 'color', 'background-color'], answer: 1 }
+    ];
+
+    const form = document.getElementById('quizForm');
+    form.innerHTML = questions.map((item, qi) => `
+      <div class="q">
+        <p><strong>${qi + 1}. ${item.q}</strong></p>
+        ${item.options.map((opt, oi) => `
+          <label><input type="radio" name="q${qi}" value="${oi}" /> ${opt}</label><br>
+        `).join('')}
+      </div>
+    `).join('');
+
+    document.getElementById('submit').addEventListener('click', () => {
+      let score = 0;
+      questions.forEach((item, qi) => {
+        const chosen = form.querySelector(`input[name="q${qi}"]:checked`);
+        if (chosen && Number(chosen.value) === item.answer) score += 1;
+      });
+      document.getElementById('result').textContent = `Final Score: ${score} / ${questions.length}`;
+    });
+  </script>
+</body>
+
+</html>

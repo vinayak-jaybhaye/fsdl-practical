@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Porsche GT3 RS</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .blog-layout {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .blog-header {
+        text-align: center;
+        padding: 16px;
+        font-weight: bold;
+        font-size: 36px;
+        margin: 5px;
+        border-bottom: 2px solid #ccc;
+        border-radius: 10px; 
+        background-color: rgb(54, 54, 133);
+      }
+
+     .blog-body {
+        padding: 16px;
+        display: flex;
+        gap: 12px;
+        flex: 1;
+     }
+
+     .blog-sidebar {
+      border: 2px solid #ccc;
+      width: 20%;
+      border-radius: 10px;
+      padding: 12px;
+      background-color: #f3f3f3;
+      font-size: 20px;
+     }
+
+     .blog-content {
+      border: 2px solid #ccc;
+      flex: 1;
+      height: 80vh;
+      border-radius: 10px;
+      padding: 12px;
+      overflow: auto;
+     }
+
+     .blog-footer {
+      min-height: 44px;
+      background-color: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 16px 16px;
+      border-radius: 8px;
+     }
+
+     .blog-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     }
+
+      #blog-image {
+        max-width: 100%;
+        height: 300px;
+        border-radius: 10px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 8px;
+        background-color: rgb(211, 205, 239);
+        cursor: pointer;
+        list-style: none;
+        text-decoration: none;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blog-layout">
+      <header class="blog-header">
+        Porsche GT3 RS
+      </header>
+      <div class="blog-body">
+        <div class="blog-sidebar">
+          <ul>
+            <li onclick="scrollToOverview()">Overview</li>
+            <li onclick="scrollToEngine()">Engine</li>
+            <li onclick="scrollToSpeed()">Top Speed</li>
+            <li onclick="scrollToPrice()">Price</li>
+          </ul>
+        </div>
+        <div class="blog-content">
+          <h2 style="text-align: center;">Porsche 911 GT3 RS</h2>
+
+          <h3 id="overview">Overview</h3>
+          <div class="blog-text"> 
+            <p>The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.</p>
+            <p>The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.</p>
+            <p>The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.</p>
+          </div> 
+
+          <h3 id="engine">Engine</h3>
+          <div class="blog-text"> 
+            <p>It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound. It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.</p>
+          </div> 
+
+          <h3 id="speed">Top Speed</h3>
+          <div class="blog-text"> 
+            <p>Top speed is around 296 km/h and the car is built for speed, grip, and control. Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.</p>
+          </div> 
+
+          <div class="blog-image-container">
+            <img id="blog-image" src="image.png" alt="Porsche GT3 RS"> 
+          </div>
+
+          <h3 id="price">Price</h3>
+          <div class="blog-text"> 
+            <p>The Porsche 911 GT3 RS price starts from around ₹3.5 crore (approx).</p>
+          </div> 
+
+          <div class="blog-text"> 
+            <p>The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving. The GT3 RS is a high-performance sports car focused on track driving.</p>
+            <p>It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound. It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.It has a 4.0L naturally aspirated flat-six engine with fast response and strong sound.</p>
+            <p>Top speed is around 296 km/h and the car is built for speed, grip, and control. Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.Top speed is around 296 km/h and the car is built for speed, grip, and control.</p>
+          </div> 
+        </div>
+      </div>
+      <footer class="blog-footer">
+        &copy; 2023 Porsche GT3 RS Blog
+      </footer>
+    </div>
+
+    <script>
+      function scrollToOverview() {
+        document.getElementById("overview").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function scrollToEngine() {
+        document.getElementById("engine").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function scrollToSpeed() {
+        document.getElementById("speed").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function scrollToPrice() {
+        document.getElementById("price").scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+
+  </body>
+</html>

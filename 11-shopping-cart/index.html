@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fd;
+      margin: 0;
+    }
+
+    .wrap {
+      max-width: 820px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .inc {
+      background: #1e7f3e;
+      color: #fff;
+    }
+
+    .dec {
+      background: #c13a32;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Shopping Cart</h1>
+    <div id="cart"></div>
+    <h2 id="total">Total: Rs 0</h2>
+  </div>
+
+  <script>
+    const items = [
+      { id: 1, name: 'Notebook', price: 60, qty: 1 },
+      { id: 2, name: 'Pen', price: 20, qty: 2 },
+      { id: 3, name: 'Calculator', price: 350, qty: 1 }
+    ];
+
+    const cartEl = document.getElementById('cart');
+    const totalEl = document.getElementById('total');
+
+    function render() {
+      cartEl.innerHTML = items.map((item) => `
+        <div class="item">
+          <strong>${item.name}</strong>
+          <span>Rs ${item.price}</span>
+          <span>Qty: ${item.qty}</span>
+          <div>
+            <button class="dec" data-id="${item.id}" data-op="dec">-</button>
+            <button class="inc" data-id="${item.id}" data-op="inc">+</button>
+          </div>
+        </div>
+      `).join('');
+      const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      totalEl.textContent = `Total: Rs ${total}`;
+    }
+
+    cartEl.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') return;
+      const id = Number(e.target.dataset.id);
+      const op = e.target.dataset.op;
+      const product = items.find((i) => i.id === id);
+      if (!product) return;
+      if (op === 'inc') product.qty += 1;
+      if (op === 'dec' && product.qty > 0) product.qty -= 1;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+
+</html>

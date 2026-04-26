@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attendance Distribution Chart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f8ff;
+    }
+
+    .wrap {
+      max-width: 700px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Attendance Distribution</h1>
+    <canvas id="attendanceChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    new Chart(document.getElementById('attendanceChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Present', 'Absent', 'Leave'],
+        datasets: [{
+          data: [78, 15, 7],
+          backgroundColor: ['#27ae60', '#eb5757', '#f2c94c']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

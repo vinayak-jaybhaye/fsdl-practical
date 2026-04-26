@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skill Bar Component</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Tahoma, sans-serif;
+      background: #f4f6f9;
+    }
+
+    .app {
+      max-width: 720px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 130px 120px;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccd5e7;
+    }
+
+    button {
+      background: #155bd6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .skill {
+      margin: 12px 0;
+    }
+
+    .label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .bar-bg {
+      background: #e6ecf8;
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00a89d, #0069d9);
+      transition: width .35s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <h1>Reusable Skill Bar</h1>
+    <form id="skillForm">
+      <input id="skillName" placeholder="Skill name (e.g., JavaScript)" required />
+      <input id="skillPercent" type="number" min="0" max="100" placeholder="0-100" required />
+      <button type="submit">Add Skill</button>
+    </form>
+    <div id="skillContainer"></div>
+  </div>
+
+  <script>
+    const skillContainer = document.getElementById('skillContainer');
+    const defaultSkills = [
+      { name: 'HTML', percent: 90 },
+      { name: 'CSS', percent: 85 },
+      { name: 'JavaScript', percent: 80 }
+    ];
+
+    function createSkillBar(name, percent) {
+      const wrap = document.createElement('div');
+      wrap.className = 'skill';
+      wrap.innerHTML = `
+        <div class="label"><strong>${name}</strong><span>${percent}%</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:${percent}%"></div></div>
+      `;
+      return wrap;
+    }
+
+    function renderSkills(skills) {
+      skillContainer.innerHTML = '';
+      skills.forEach((s) => skillContainer.appendChild(createSkillBar(s.name, s.percent)));
+    }
+
+    const skills = [...defaultSkills];
+    renderSkills(skills);
+
+    document.getElementById('skillForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('skillName').value.trim();
+      const percent = Number(document.getElementById('skillPercent').value);
+      if (!name || Number.isNaN(percent) || percent < 0 || percent > 100) return;
+      skills.push({ name, percent });
+      renderSkills(skills);
+      e.target.reset();
+    });
+  </script>
+</body>
+
+</html>

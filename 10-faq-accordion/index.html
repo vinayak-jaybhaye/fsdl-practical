@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ Accordion</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f4fa;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .item {
+      background: #fff;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    }
+
+    .q {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: none;
+      padding: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .a {
+      padding: 0 14px 14px;
+      display: none;
+      color: #334;
+    }
+
+    .item.open .a {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>FAQ Accordion</h1>
+
+    <div class="item">
+      <button class="q">What is FSDL practical?</button>
+      <div class="a">It is a hands-on assessment of frontend and backend web development skills.</div>
+    </div>
+
+    <div class="item">
+      <button class="q">Can I use localStorage in exam tasks?</button>
+      <div class="a">Yes, for tasks involving persistence such as notes and theme preferences.</div>
+    </div>
+
+    <div class="item">
+      <button class="q">How should I structure a mini project?</button>
+      <div class="a">Keep HTML, CSS, and JS clean and modular; use clear names and simple interactions.</div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.q').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Filtering System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5f9;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccd5e4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .card {
+      border: 1px solid #dce4f1;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f9fbff;
+    }
+
+    .cat {
+      font-size: 12px;
+      color: #385f9d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Category Filter</h1>
+    <select id="category">
+      <option value="all">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="books">Books</option>
+    </select>
+    <div id="items" class="grid"></div>
+  </div>
+
+  <script>
+    const products = [
+      { name: 'Headphones', category: 'electronics' },
+      { name: 'Laptop Sleeve', category: 'electronics' },
+      { name: 'T-Shirt', category: 'clothing' },
+      { name: 'Jeans', category: 'clothing' },
+      { name: 'JavaScript Book', category: 'books' },
+      { name: 'Design Patterns', category: 'books' }
+    ];
+
+    const items = document.getElementById('items');
+    const category = document.getElementById('category');
+
+    function render() {
+      const selected = category.value;
+      const filtered = selected === 'all' ? products : products.filter((p) => p.category === selected);
+      items.innerHTML = filtered.map((p) => `
+        <article class="card">
+          <strong>${p.name}</strong>
+          <div class="cat">${p.category}</div>
+        </article>
+      `).join('');
+    }
+
+    category.addEventListener('change', render);
+    render();
+  </script>
+</body>
+
+</html>

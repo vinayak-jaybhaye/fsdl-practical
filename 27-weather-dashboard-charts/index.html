@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef4ff;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Weekly Weather Dashboard</h1>
+    <div class="grid">
+      <div class="card"><canvas id="lineChart"></canvas></div>
+      <div class="card"><canvas id="barChart"></canvas></div>
+      <div class="card"><canvas id="pieChart"></canvas></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{ label: 'Temperature (C)', data: [31, 33, 34, 32, 30, 29, 31], borderColor: '#2f80ed', tension: 0.35 }]
+      }
+    });
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{ label: 'Humidity (%)', data: [62, 58, 55, 61, 66, 70, 64], backgroundColor: '#27ae60' }]
+      },
+      options: { scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Sunny', 'Cloudy', 'Rainy'],
+        datasets: [{ data: [4, 2, 1], backgroundColor: ['#f2c94c', '#56ccf2', '#2d9cdb'] }]
+      }
+    });
+  </script>
+</body>
+
+</html>

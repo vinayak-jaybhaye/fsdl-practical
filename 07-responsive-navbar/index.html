@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background: #113057;
+      color: #fff;
+    }
+
+    .bar {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .links a,
+    .drop-btn {
+      color: #fff;
+      text-decoration: none;
+      background: none;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .menu {
+      position: absolute;
+      top: 28px;
+      left: 0;
+      min-width: 160px;
+      background: #fff;
+      color: #222;
+      border-radius: 8px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .2);
+      display: none;
+    }
+
+    .menu a {
+      display: block;
+      color: #222;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    .menu a:hover {
+      background: #f1f4fb;
+    }
+
+    .dropdown.open .menu {
+      display: block;
+    }
+
+    .ham {
+      display: none;
+      font-size: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .ham {
+        display: block;
+      }
+
+      .links {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 54px;
+        background: #113057;
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .links.show {
+        display: flex;
+      }
+
+      .menu {
+        position: static;
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="bar">
+      <strong>Campus Portal</strong>
+      <button id="ham" class="ham">☰</button>
+      <div id="links" class="links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <div id="dropdown" class="dropdown">
+          <button class="drop-btn">Services ▾</button>
+          <div class="menu">
+            <a href="#">Web Dev</a>
+            <a href="#">UI Design</a>
+            <a href="#">Training</a>
+          </div>
+        </div>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    const ham = document.getElementById('ham');
+    const links = document.getElementById('links');
+    const dropdown = document.getElementById('dropdown');
+
+    ham.addEventListener('click', () => links.classList.toggle('show'));
+    dropdown.querySelector('.drop-btn').addEventListener('click', () => dropdown.classList.toggle('open'));
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+    });
+  </script>
+</body>
+
+</html>

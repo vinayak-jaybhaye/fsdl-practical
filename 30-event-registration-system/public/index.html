@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Registration System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f8f2;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #cfdcc9;
+    }
+
+    button {
+      background: #2b8a3e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th,
+    td {
+      border: 1px solid #d8e8d1;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e9f7e4;
+    }
+
+    #msg {
+      margin-top: 10px;
+      min-height: 20px;
+      color: #b03630;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Event Registration System</h1>
+    <div class="grid">
+      <input id="name" placeholder="Participant Name" />
+      <input id="email" placeholder="Email" />
+      <input id="eventName" placeholder="Event Name" />
+      <button id="add">Register</button>
+    </div>
+    <div id="msg"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Event</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const list = document.getElementById('list');
+    const msg = document.getElementById('msg');
+
+    async function loadRegistrations() {
+      const res = await fetch('/api/registrations');
+      const regs = await res.json();
+      list.innerHTML = regs.map((r) => `
+        <tr>
+          <td>${r.name}</td>
+          <td>${r.email}</td>
+          <td>${r.eventName}</td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('add').addEventListener('click', async () => {
+      msg.textContent = '';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const eventName = document.getElementById('eventName').value.trim();
+
+      if (!name || !email || !eventName) {
+        msg.textContent = 'All fields are required.';
+        return;
+      }
+
+      const res = await fetch('/api/registrations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, eventName })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        msg.textContent = data.error || data.message || 'Failed to register.';
+        return;
+      }
+
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('eventName').value = '';
+      loadRegistrations();
+    });
+
+    loadRegistrations();
+  </script>
+</body>
+
+</html>

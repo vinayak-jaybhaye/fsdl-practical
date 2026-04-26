@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f3f7ff;
+    }
+
+    .wrap {
+      max-width: 500px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #cdd8eb;
+    }
+
+    button {
+      background: #2266d8;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      background: #f9fbff;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .del {
+      background: #bf3e36;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>To-Do List</h1>
+    <div class="row">
+      <input id="task" placeholder="Add task" />
+      <button id="add">Add</button>
+    </div>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    const list = document.getElementById('list');
+
+    function addTask(text) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${text}</span><button class="del">Delete</button>`;
+      list.appendChild(li);
+    }
+
+    document.getElementById('add').addEventListener('click', () => {
+      const input = document.getElementById('task');
+      const text = input.value.trim();
+      if (!text) return;
+      addTask(text);
+      input.value = '';
+    });
+
+    list.addEventListener('click', (e) => {
+      if (e.target.classList.contains('del')) e.target.parentElement.remove();
+    });
+  </script>
+</body>
+
+</html>

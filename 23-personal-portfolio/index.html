@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffef8;
+      color: #1e262f;
+    }
+
+    header {
+      background: linear-gradient(120deg, #1f3a69, #225b8f);
+      color: #fff;
+      padding: 40px 16px;
+      text-align: center;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #f4f7ff;
+      border: 1px solid #d7e1f8;
+      border-radius: 10px;
+      padding: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Karthik R</h1>
+    <p>Web Developer | Problem Solver</p>
+  </header>
+
+  <section>
+    <h2>About</h2>
+    <p>I enjoy building user-friendly web apps and learning through hands-on projects.</p>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="cards">
+      <div class="card">HTML/CSS</div>
+      <div class="card">JavaScript</div>
+      <div class="card">React</div>
+      <div class="card">Node.js</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="cards">
+      <div class="card"><strong>Quiz App</strong>
+        <p>Interactive MCQ app with scoring.</p>
+      </div>
+      <div class="card"><strong>Notes App</strong>
+        <p>Notes manager with localStorage.</p>
+      </div>
+      <div class="card"><strong>Student Dashboard</strong>
+        <p>Charts and analytics for performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Email: karthik.dev@example.com</p>
+    <p>Phone: +91-9000000001</p>
+  </section>
+</body>
+
+</html>
